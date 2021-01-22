@@ -21,7 +21,7 @@ int steuerWert = 0;
 int steuerWert2 = 0;
 int steuerWert3 = 0;
 int burstCounter = 0;
-int intCounter = 1;
+int intCounter = 0;
 int timerCounter = 0;
 int pinStatus = 0;
 int alphaUs;
@@ -72,7 +72,7 @@ int main(void)
 				}
 			break;
 			case 0x05: //burst fire low momentum 
-				if(burstCounter > steuerWert){
+				if(intCounter > 2*steuerWert){
 					SSRoff();
 				}else{
 					SSRon();
@@ -92,13 +92,13 @@ int main(void)
 }
 
 ISR (INT0_vect){
+	timerCounter = 0;
 		if (intCounter == 200){
 			intCounter = 0;
 			getControlVals();
 		}
 		intCounter++;
-		burstCounter = (intCounter+1)/2;
-	timerCounter = 0;
+	
 	
 }
 
@@ -144,8 +144,7 @@ unsigned char USART_Receive()
 	/* Wait for data to be received */
 	while (!(UCSR0A & (1<<RXC0)))
 	{
-		
-		
+
 	}
 	/* Get and return received data from buffer */
 	return UDR0;
