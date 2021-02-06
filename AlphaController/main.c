@@ -17,22 +17,34 @@ double fireAngleTableP [101]={1, 0.885, 0.855, 0.83, 0.815, 0.8, 0.785, 0.77, 0.
 int netzT = 10000;
 
 int mode = 0x00;
-int steuerWert = 0;
-int steuerWert2 = 0;
-int steuerWert3 = 0;
+int ctrlVal1 = 0;
+int ctrlVal2 = 0;
+int ctrlVal3 = 0;
 int burstCounter = 0;
 int intCounter = 0;
 int timerCounter = 0;
 int pinStatus = 0;
 int alphaUs;
 int clockCnt;
+int lNumber, sNumber; 
 double alphaRad;
 
-void SSRon();
-void SSRoff();
+void SSR1on();
+void SSR1off();
+void SSR2on();
+void SSR2off();
+void SSR3Aon();
+void SSR3Aoff();
+void SSR3Bon();
+void SSR3Boff();
+void SSR3Con();
+void SSR3Coff();
+
 void Init_Int0();
 void Init_Timer_0();
 void getControlVals();
+void getAdcVals();
+void calcBurstVals();
 
 
 int main(void)
@@ -45,61 +57,59 @@ int main(void)
 	while(1){
 		switch(mode){
 			case 0x00: //permanent LOW
-				SSRoff();
+				SSR1off();
 			break;
 			case 0x01: //permanent HIGH
-				SSRon();
+				SSR1on();
 			break;
 			case 0x02: //uncorrected phase angle
-				if(timerCounter > (fireAngleTable[steuerWert]*netzT)/50){
-					SSRoff();
+				if(timerCounter > (fireAngleTable[ctrlVal1]*netzT)/50){
+					SSR1off();
 				}else{
-					SSRon();
+					SSR1on();
 				}
 			break;
 			case 0x03: //phase angle power
-				if(timerCounter > (fireAngleTableP[steuerWert]*netzT)/50){
-					SSRoff();
+				if(timerCounter > (fireAngleTableP[ctrlVal1]*netzT)/50){
+					SSR1off();
 				}else{
-					SSRon();
+					SSR1on();
 				}
 			break;
 			case 0x04: //phase angle effective voltage
-				if(timerCounter > (fireAngleTableV[steuerWert]*netzT)/50){
-					SSRoff();
+				if(timerCounter > (fireAngleTableV[ctrlVal1]*netzT)/50){
+					SSR1off();
 				}else{
-					SSRon();
+					SSR1on();
 				}
 			break;
 			case 0x05: //burst fire low momentum 
-				if(intCounter > 2*steuerWert){
-					SSRoff();
+				if(intCounter > 2*ctrlVal1){
+					SSR1off();
 				}else{
-					SSRon();
+					SSR1on();
 				}
 			break;
 			case 0x06: //burst fire high momentum
 				if(pinStatus){
-					SSRon();
+					SSR1on();
 				}else{
-					SSRoff();
+					SSR1off();
 				}
 			break;
-			
 		}
-		
 	}
 }
 
 ISR (INT0_vect){
+	intCounter++;
 	timerCounter = 0;
 		if (intCounter == 200){
 			intCounter = 0;
-			getControlVals();
-		}
-		intCounter++;
-	
-	
+			//getControlVals();
+			//getAdcVals();
+			//calcBurstVals();
+		}	
 }
 
 ISR (TIMER0_COMPA_vect){
@@ -120,12 +130,44 @@ void Init_Timer_0(){
 	TIMSK0 |= (1<<1);		//enable compare interrupt
 }
 
-void SSRon (){
+void SSR1on (){
 	PORTB |= (1<<PB0);		//set PB0 HIGH
 }
 
-void SSRoff (){
+void SSR1off (){
 	PORTB &= ~(1<<PB0);		//clear PB0 aka.  set PB0 LOW
+}
+
+void SSR2on (){
+	PORTB |= (1<<PB1);		//set PB0 HIGH
+}
+
+void SSR2off (){
+	PORTB &= ~(1<<PB1);		//clear PB0 aka.  set PB0 LOW
+}
+
+void SSR3Aon (){
+	PORTB |= (1<<PB2);		//set PB0 HIGH
+}
+
+void SSR3Aoff (){
+	PORTB &= ~(1<<PB2);		//clear PB0 aka.  set PB0 LOW
+}
+
+void SSR3Bon (){
+	PORTB |= (1<<PB3);		//set PB0 HIGH
+}
+
+void SSR3Boff (){
+	PORTB &= ~(1<<PB3);		//clear PB0 aka.  set PB0 LOW
+}
+
+void SSR3Con (){
+	PORTB |= (1<<PB4);		//set PB0 HIGH
+}
+
+void SSR3Coff (){
+	PORTB &= ~(1<<PB4);		//clear PB0 aka.  set PB0 LOW
 }
 
 void USART_Init()
@@ -159,3 +201,26 @@ void USART_Transmit(unsigned char data)
 	UDR0 = data;
 }
 
+void calcBurstVals(){
+	float quot;
+	float hundert = 100.00;
+	int sPercent, sTime, lPercent, lTime;
+	char rhythm;
+	quot = roundf((hundert/steuerWert)*100)/100;
+	sPercent = 100-(quot-floor(quot))*100;
+	lPercent = 100-sPercent;
+	sTime = floor(quot);
+	if(lPercent != 0) {
+		lTime = sTime + 1;
+		}else {
+		lTime = 0;
+	}
+	sNumber = round((sPercent * steuerWert)/100);
+	lNumber = round((lPercent * steuerWert)/100);
+
+	if(lNumber>sNumber){
+		rhythm = 'L';
+		}else {
+		rhythm = 'S';
+	}
+}
