@@ -17,8 +17,8 @@ double fireAngleTableP [101]={1, 0.885, 0.855, 0.83, 0.815, 0.8, 0.785, 0.77, 0.
 
 int netzT = 10000;
 
-int mode = 3;
-int ctrlVal1 = 90;
+int mode = 6;
+int ctrlVal1 = 0;
 int ctrlVal2 = 0;
 int ctrlVal3 = 0;
 int ctrlAdc = 0;
@@ -49,10 +49,13 @@ void SSR3Coff();
 void Init_Int0();
 void Init_Timer_0();
 void USART_Init();
-void uart_getc();
-void getControlVals();
+unsigned char uart_getc();
+void uart_gets( char* Buffer, uint8_t MaxLen, char endChar);
+void requestControlVals();
 void getAdcVals();
 void calcBurstVals();
+int uart_sendc(unsigned char c);
+void uart_sends(char *s);
 
 
 int main(void)
@@ -65,38 +68,43 @@ int main(void)
 	
 	while(1){
 		switch(mode){
-			case 1: //permanent LOW
+			case 1: //permanent LOW	//WORKING
 				SSR1off();
 			break;
-			case 2: //permanent HIGH
+			case 2: //permanent HIGH //WORKING
 				SSR1on();
 			break;
-			case 3: //uncorrected phase angle
-				if(timerCounter > (fireAngleTable[ctrlVal1]*netzT)/50){
+			case 3: //uncorrected phase angle //WORKING
+				if(timerCounter+1 > (fireAngleTable[ctrlVal1]*netzT)/50){
+					SSR1on();
+				}else{
+					SSR1off();
+				}
+			break;
+			case 4: //phase angle power	//WORKING
+				if(timerCounter+1 > (fireAngleTableP[ctrlVal1]*netzT)/50){
+					SSR1on();
+				}else{
+					SSR1off();
+				}
+			break;
+			case 5: //phase angle effective voltage //WORKING
+				if(timerCounter+1 > (fireAngleTableV[ctrlVal1]*netzT)/50){
+					SSR1on();
+				}else{
+					SSR1off();
+				}
+			break;
+			case 6: //burst fire low momentum //WORKING
+				if(intCounter+1 > 2*ctrlVal1){
 					SSR1off();
 				}else{
 					SSR1on();
 				}
-			break;
-			case 4: //phase angle power
-				if(timerCounter > (fireAngleTableP[ctrlVal1]*netzT)/50){
-					SSR1off();
+				if(intCounter+1 > 2*ctrlVal2){
+					SSR2off();
 				}else{
-					SSR1on();
-				}
-			break;
-			case 5: //phase angle effective voltage
-				if(timerCounter > (fireAngleTableV[ctrlVal1]*netzT)/50){
-					SSR1off();
-				}else{
-					SSR1on();
-				}
-			break;
-			case 6: //burst fire low momentum 
-				if(intCounter > 2*ctrlVal1){
-					SSR1off();
-				}else{
-					SSR1on();
+					SSR2on();
 				}
 			break;
 			case 7: //burst fire high momentum
@@ -111,18 +119,19 @@ int main(void)
 }
 
 ISR (INT0_vect){
-	intCounter++;
 	timerCounter = 0;
-		if (intCounter == 200){
+	TCNT0 = 0;
+	intCounter++;
+		if (intCounter+1 == 200){
 			intCounter = 0;
-			//getControlVals();
+			requestControlVals();
 			//if(ctrlAdc == 1){
 			//	getAdcVals();
 			//}
 			//if(mode == 7){
 			//calcBurstVals();
 			//}
-		}	
+		}
 }
 
 ISR (TIMER0_COMPA_vect){
@@ -188,23 +197,11 @@ void USART_Init()
 	/* Set baud rate */
 	UBRR0 = 103;
 	/* Enable receiver and transmitter */
-	UCSR0B = (1<<RXEN0)|(1<<TXEN0);
+	UCSR0B = (1<<RXEN0)|(1<<TXEN0)|(1<<RXCIE0)|(1<<TXCIE0);
 	/* Set frame format: 8data, 1stop bit */
 	UCSR0C = (1<<UCSZ01)|(1<<UCSZ00);
 	UCSR0C &= ~(1<<USBS0);
 }
-
-unsigned char uart_getc()
-{
-	/* Wait for data to be received */
-	while (!(UCSR0A & (1<<RXC0)))
-	{
-
-	}
-	/* Get and return received data from buffer */
-	return UDR0;
-}
-
 
 void calcBurstVals(int steuerWert, int channel){
 	float quot;
@@ -230,4 +227,79 @@ void calcBurstVals(int steuerWert, int channel){
 		rhythm = 0;
 	}
 	
+}
+
+void requestControlVals(){
+	uart_sends("REQ");	
+}
+
+unsigned char uart_getc()
+{
+	/* Wait for data to be received */
+	while (!(UCSR0A & (1<<RXC0)))
+	{
+
+	}
+	/* Get and return received data from buffer */
+	return UDR0;
+}
+
+void uart_gets( char* Buffer, uint8_t MaxLen, char endChar )
+{
+	uint8_t NextChar;
+	uint8_t StringLen = 0;
+
+	NextChar = uart_getc();         // Warte auf und empfange das nächste Zeichen
+
+	// Sammle solange Zeichen, bis:
+	// * entweder das String Ende Zeichen kam
+	// * oder das aufnehmende Array voll ist
+	while( NextChar != endChar && StringLen < MaxLen - 1 ) {
+		*Buffer++ = NextChar;
+		StringLen++;
+		NextChar = uart_getc();
+	}
+
+	// Noch ein '\0' anhängen um einen Standard
+	// C-String daraus zu machen
+	*Buffer = '\0';
+}
+
+ISR(USART0_RX_vect){ //Wenn empfangen->wird das ausgeführt
+	char input[50];
+	int buffer[100];
+	uart_gets(input, sizeof(input),'#');
+	uart_sends(input);
+	//received STRING EX. "1-0-100-099-098"
+	char* token = strtok(input, "-");
+	mode = atoi(token);
+	token = strtok(0, "-");
+	ctrlAdc = atoi(token);
+	token = strtok(0, "-");
+	ctrlVal1 = atoi(token);
+	token = strtok(0, "-");
+	ctrlVal2 = atoi(token);
+	token = strtok(0, "-");
+	ctrlVal3 = atoi(token);	
+}
+
+int uart_sendc(unsigned char c)
+{
+	while (!(UCSR0A & (1<<UDRE0)))  /* warten bis Senden moeglich */
+	{
+	}
+
+	UDR0 = c;                      /* sende Zeichen */
+	return 0;
+}
+
+
+/* puts ist unabhaengig vom Controllertyp */
+void uart_sends (char *s)
+{
+    while (*s)
+    {   /* so lange *s != '\0' also ungleich dem "String-Endezeichen(Terminator)" */
+        uart_sendc(*s);
+        s++;
+    }
 }
