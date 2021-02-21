@@ -31,13 +31,18 @@ volatile int intCounterPhaseB = 133;
 volatile int timerCounter = 0;
 volatile int timerCounterA = 0;
 volatile int timerCounterB = 0;
+volatile int bufferIdx = 0;
+volatile int uartFlag = 0;
+volatile char uartBuffer;
+volatile char buffer[10];
 
-//-----------------------variables for mode 7 control
+//-----------------------variables for mode 7 control, not implemented yet
 int lNumber, sNumber;
 int burstCh1 [5]= {0, 0, 0, 0, 0}; //{sTime, sNumber, lTime, lNumber, rhythm}
 int burstCh2 [5]= {0, 0, 0, 0, 0};
 int burstCh3 [5]= {0, 0, 0, 0, 0};
 char delimiter[] = "-";
+
 volatile char input[50];
 
 //function declarations
@@ -60,17 +65,38 @@ void uart_gets( char* Buffer, uint8_t MaxLen, char endChar);
 void requestControlVals();
 void getAdcVals();
 void calcBurstVals();
-int uart_sendc(unsigned char c);
+void uart_sendc(char c);
 void uart_sends(char *s);
 
 
 int main(void) {
-    sei();
     Init_Int0();
     Init_Timer_0();
     USART_Init();
+    sei();
     DDRB = 0xFF;
     while(1) {
+        if(uartFlag == 1 && uartBuffer != '#') {
+            input[bufferIdx] = uartBuffer;
+            bufferIdx++;
+            uartFlag = 0;
+        } else if (uartFlag == 1 && uartBuffer == '#') {
+            bufferIdx++;
+            input[bufferIdx] = '\0';
+            char* token = strtok(input, "-");
+            mode = atoi(token);
+            token = strtok(0, "-");
+            ctrlAdc = atoi(token);
+            token = strtok(0, "-");
+            ctrlVal1 = atoi(token);
+            token = strtok(0, "-");
+            ctrlVal2 = atoi(token);
+            token = strtok(0, "-");
+            ctrlVal3 = atoi(token);
+            bufferIdx = 0;
+            uartFlag = 0;
+        }
+        //uart_sendc('0');
         switch(mode) {
         case 1: //permanent LOW	//WORKING
             SSR1off();
@@ -152,7 +178,7 @@ ISR (INT0_vect) {
     //intCounterPhaseB++;
     if (intCounter == 200) {
         intCounter = 0;
-        //uart_sends("REQ"); //Request Control Values
+        uart_sendc('r'); //Request Control Values
         //if(ctrlAdc == 1){
         //	getAdcVals();
         //}
@@ -167,7 +193,10 @@ ISR (INT0_vect) {
         intCounterPhaseB = 0;
     }
 }
-ISR(USART0_RX_vect) { //Wenn empfangen->wird das ausgeführt
+ISR(USART0_RX_vect) { //Wenn empfangen->wird das ausgefuehrt
+    uartBuffer = uart_getc();
+    uartFlag = 1;
+    //input[bufferIdx] = uart_getc();
     /*uart_gets(input, sizeof(input),'#');
     //received STRING EX. "1-0-100-099-098"
     char* token = strtok(input, "-");
@@ -180,8 +209,8 @@ ISR(USART0_RX_vect) { //Wenn empfangen->wird das ausgeführt
     ctrlVal2 = atoi(token);
     token = strtok(0, "-");
     ctrlVal3 = atoi(token);*/
-    ctrlVal1 = (uart_getc()-'0')*10;
-    ctrlVal2 = (uart_getc()-'0')*10;
+    //ctrlVal1 = (uart_getc()-'0')*10;
+    //ctrlVal2 = (uart_getc()-'0')*10;
 }
 ISR (TIMER0_COMPA_vect) {
     timerCounter++;
@@ -219,7 +248,7 @@ unsigned char uart_getc() {
 void uart_gets( char* Buffer, uint8_t MaxLen, char endChar ) {
     uint8_t NextChar;
     uint8_t StringLen = 0;
-    NextChar = uart_getc();         // Warte auf und empfange das nächste Zeichen
+    NextChar = uart_getc();         // Warte auf und empfange das n?chste Zeichen
     // Sammle solange Zeichen, bis:
     // * entweder das String Ende Zeichen kam
     // * oder das aufnehmende Array voll ist
@@ -228,15 +257,14 @@ void uart_gets( char* Buffer, uint8_t MaxLen, char endChar ) {
         StringLen++;
         NextChar = uart_getc();
     }
-    // Noch ein '\0' anhängen um einen Standard
+    // Noch ein '\0' anh?ngen um einen Standard
     // C-String daraus zu machen
     *Buffer = '\0';
 }
-int uart_sendc(unsigned char c) {
+void uart_sendc(char c) {
     while (!(UCSR0A & (1<<UDRE0))) { /* warten bis Senden moeglich */
     }
     UDR0 = c;                      /* sende Zeichen */
-    return 0;
 }
 /* puts ist unabhaengig vom Controllertyp */
 void uart_sends (char *s) {
