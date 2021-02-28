@@ -37,8 +37,6 @@ volatile int timerCounterB = 0;
 volatile int bufferIdx = 0;
 volatile int uartFlag = 0;
 volatile char uartBuffer;
-volatile char buffer[10];
-volatile int testCounter = 0;
 
 //-----------------------variables for mode 7 control, not implemented yet
 char delimiter[] = "-";
@@ -69,15 +67,20 @@ void uart_sendc(char c);
 
 int main(void) {
     Init_Int0();
-    //Init_Timer_0();
+    Init_Timer_0();
     USART_Init();
     sei();
     DDRB = 0xFF;
     while(1) {
         if (intCounter == 200) {
             intCounter = 0;
-            testCounter++;
             uart_sendc('r'); //Request Control Values
+        }
+        if (intCounterPhaseA == 200) {
+            intCounterPhaseA = 0;
+        }
+        if (intCounterPhaseB == 200) {
+            intCounterPhaseB = 0;
         }
         if(uartFlag == 1 && uartBuffer != '#') {
             input[bufferIdx] = uartBuffer;
@@ -114,21 +117,19 @@ int main(void) {
             break;
         case 3: //uncorrected phase angle //WORKING
             if(timerCounter+1 > (fireAngleTable[ctrlVal1]*netzT)/50) {
-                //SSR1on();
-                PORTB |= (1<<PB0);
+                SSR1on();
             } else {
-                //SSR1off();
-                PORTB &= ~(1<<PB0);
+                SSR1off();
             }
             if(timerCounter+1 > (fireAngleTable[ctrlVal2]*netzT)/50) {
-                PORTB |= (1<<PB1);
+                SSR2on();
             } else {
-                PORTB &= ~(1<<PB1);
+                SSR2off();
             }
             if(timerCounter+1 > (fireAngleTable[ctrlVal3]*netzT)/50) {
-                PORTB |= (1<<PB2);
+                SSR3Aon();
             } else {
-                PORTB &= ~(1<<PB2);
+                SSR3Aoff();
             }
             break;
         case 4: //phase angle power	//WORKING
@@ -185,18 +186,8 @@ int main(void) {
 ISR (INT0_vect) {
     timerCounter = 0;
     intCounter++;
-    //intCounterPhaseA++;
-    //intCounterPhaseB++;
-    /*if (intCounter == 200) {
-        intCounter = 0;
-        uart_sendc('r'); //Request Control Values
-    }
-    if (intCounterPhaseA == 200) {
-        intCounterPhaseA = 0;
-    }
-    if (intCounterPhaseB == 200) {
-        intCounterPhaseB = 0;
-    }*/
+    intCounterPhaseA++;
+    intCounterPhaseB++;
 }
 ISR(USART0_RX_vect) { //Wenn empfangen->wird das ausgefuehrt
     uartBuffer = uart_getc();
@@ -276,7 +267,7 @@ void Init_Timer_0() {
     TIMSK0 |= (1<<1);		//enable compare interrupt
 }
 void USART_Init() {
-    /* Set baud rate */y
+    /* Set baud rate */
     UBRR0 = 25;
     /* Enable receiver and transmitter */
     UCSR0B = (1<<RXEN0)|(1<<TXEN0)|(1<<RXCIE0);
