@@ -1,2 +1,1 @@
-# aC
-aC C-Code
+# AVR C-Code for my diploma thesis project
