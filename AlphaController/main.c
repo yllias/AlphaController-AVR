@@ -16,9 +16,9 @@ int algoA[101] = {0};
 int algoB[101] = {0};
 int algoC[101] = {0};
 
-double fireAngleTable [101]= {1, 0.99, 0.98, 0.97, 0.96, 0.95, 0.94, 0.93, 0.92, 0.91, 0.9, 0.89, 0.88, 0.87, 0.86, 0.85, 0.84, 0.83, 0.82, 0.81, 0.8, 0.79, 0.78, 0.77, 0.76, 0.75, 0.74, 0.73, 0.72, 0.71, 0.7, 0.69, 0.68, 0.67, 0.66, 0.65, 0.64, 0.63, 0.62, 0.61, 0.6, 0.59, 0.58, 0.57, 0.56, 0.55, 0.54, 0.53, 0.52, 0.51, 0.5, 0.49, 0.48, 0.47, 0.46, 0.45, 0.44, 0.43, 0.42, 0.41, 0.4, 0.39, 0.38, 0.37, 0.36, 0.35, 0.34, 0.33, 0.32, 0.31, 0.3, 0.29, 0.28, 0.27, 0.26, 0.25, 0.24, 0.23, 0.22, 0.21, 0.2, 0.19, 0.18, 0.17, 0.16, 0.15, 0.14, 0.13, 0.12, 0.11, 0.1, 0.09, 0.08, 0.07, 0.06, 0.05, 0.04, 0.03, 0.02, 0.01, 0};
-double fireAngleTableV [101]= {1, 0.975, 0.96, 0.95, 0.935, 0.925, 0.92, 0.91, 0.9, 0.89, 0.885, 0.875, 0.87, 0.86, 0.855, 0.845, 0.84, 0.835, 0.825, 0.82, 0.815, 0.805, 0.8, 0.795, 0.79, 0.78, 0.775, 0.77, 0.765, 0.755, 0.75, 0.745, 0.74, 0.735, 0.725, 0.72, 0.715, 0.71, 0.705, 0.695, 0.69, 0.685, 0.68, 0.675, 0.67, 0.66, 0.655, 0.65, 0.645, 0.64, 0.63, 0.625, 0.62, 0.615, 0.61, 0.6, 0.595, 0.59, 0.585, 0.575, 0.57, 0.565, 0.56, 0.55, 0.545, 0.54, 0.53, 0.525, 0.52, 0.51, 0.505, 0.5, 0.49, 0.485, 0.475, 0.47, 0.46, 0.455, 0.445, 0.435, 0.43, 0.42, 0.41, 0.405, 0.395, 0.385, 0.375, 0.365, 0.355, 0.34, 0.33, 0.315, 0.305, 0.29, 0.275, 0.255, 0.235, 0.215, 0.185, 0.145, 0};
-double fireAngleTableP [101]= {1, 0.885, 0.855, 0.83, 0.815, 0.8, 0.785, 0.77, 0.76, 0.75, 0.74, 0.73, 0.725, 0.715, 0.705, 0.7, 0.69, 0.685, 0.675, 0.67, 0.665, 0.655, 0.65, 0.645, 0.64, 0.63, 0.625, 0.62, 0.615, 0.61, 0.605, 0.6, 0.595, 0.585, 0.58, 0.575, 0.57, 0.565, 0.56, 0.555, 0.55, 0.545, 0.54, 0.535, 0.53, 0.525, 0.52, 0.515, 0.51, 0.505, 0.5, 0.495, 0.49, 0.485, 0.48, 0.475, 0.47, 0.465, 0.46, 0.455, 0.45, 0.445, 0.44, 0.435, 0.43, 0.425, 0.42, 0.415, 0.405, 0.4, 0.395, 0.39, 0.385, 0.38, 0.375, 0.37, 0.36, 0.355, 0.35, 0.345, 0.335, 0.33, 0.325, 0.315, 0.31, 0.3, 0.295, 0.285, 0.275, 0.27, 0.26, 0.25, 0.24, 0.23, 0.215, 0.2, 0.185, 0.17, 0.145, 0.115, 0};
+double fireAngleTable [101]= {20000, 19800, 19600, 19400, 19200, 19000, 18800, 18600, 18400, 18200, 18000, 17800, 17600, 17400, 17200, 17000, 16800, 16600, 16400, 16200, 16000, 15800, 15600, 15400, 15200, 15000, 14800, 14600, 14400, 14200, 14000, 13800, 13600, 13400, 13200, 13000, 12800, 12600, 12400, 12200, 12000, 11800, 11600, 11400, 11200, 11000, 10800, 10600, 10400, 10200, 10000, 9800, 9600, 9400, 9200, 9000, 8800, 8600, 8400, 8200, 8000, 7800, 7600, 7400, 7200, 7000, 6800, 6600, 6400, 6200, 6000, 5800, 5600, 5400, 5200, 5000, 4800, 4600, 4400, 4200, 4000, 3800, 3600, 3400, 3200, 3000, 2800, 2600, 2400, 2200, 2000, 1800, 1600, 1400, 1200, 1000, 800, 600, 400, 200, 0};
+double fireAngleTableV [101]= {20000, 19500, 19200, 19000, 18700, 18500, 18400, 18200, 18000, 17800, 17700, 17500, 17400, 17200, 17100, 16900, 16800, 16700, 16500, 16400, 16300, 16100, 16000, 15900, 15800, 15600, 15500, 15400, 15300, 15100, 15000, 14900, 14800, 14700, 14500, 14400, 14300, 14200, 14100, 13900, 13800, 13700, 13600, 13500, 13400, 13200, 13100, 13000, 12900, 12800, 12600, 12500, 12400, 12300, 12200, 12000, 11900, 11800, 11700, 11500, 11400, 11300, 11200, 11000, 10900, 10800, 10600, 10500, 10400, 10200, 10100, 10000, 9800, 9700, 9500, 9400, 9200, 9100, 8900, 8700, 8600, 8400, 8200, 8100, 7900, 7700, 7500, 7300, 7100, 6800, 6600, 6300, 6100, 5800, 5500, 5100, 4700, 4300, 3700, 2900, 0};
+double fireAngleTableP [101]= {20000, 17700, 17100, 16600, 16300, 16000, 15700, 15400, 15200, 15000, 14800, 14600, 14500, 14300, 14100, 14000, 13800, 13700, 13500, 13400, 13300, 13100, 13000, 12900, 12800, 12600, 12500, 12400, 12300, 12200, 12100, 12000, 11900, 11700, 11600, 11500, 11400, 11300, 11200, 11100, 11000, 10900, 10800, 10700, 10600, 10500, 10400, 10300, 10200, 10100, 10000, 9900, 9800, 9700, 9600, 9500, 9400, 9300, 9200, 9100, 9000, 8900, 8800, 8700, 8600, 8500, 8400, 8300, 8100, 8000, 7900, 7800, 7700, 7600, 7500, 7400, 7200, 7100, 7000, 6900, 6700, 6600, 6500, 6300, 6200, 6000, 5900, 5700, 5500, 5400, 5200, 5000, 4800, 4600, 4300, 4000, 3700, 3400, 2900, 2300, 0};
 
 int netzT = 10000;
 
@@ -26,21 +26,22 @@ int netzT = 10000;
 volatile int mode = 7;
 volatile int ctrlVal1 = 0;
 volatile int ctrlVal2 = 0;
-volatile int ctrlVal3 = 0;
+volatile int ctrlVal3 = 67;
 
 //-----------------------variables for timing and synchronisation--------
 volatile int intCounter = 0;
-volatile int intCounterPhaseA = 133;
-volatile int intCounterPhaseB = 67;
+volatile int intCounterPhaseA = 0;
+volatile int intCounterPhaseB = 0;
 volatile int burstCounter = 0;
-volatile int burstCounterA = 67;
-volatile int burstCounterB = 33;
+volatile int burstCounterA = 0;
+volatile int burstCounterB = 0;
 volatile int timerCounter = 0;
-volatile int timerCounterA = 133;
-volatile int timerCounterB = 67;
+volatile int timerCounterA = 0;
+volatile int timerCounterB = 0;
 volatile int bufferIdx = 0;
 volatile int uartFlag = 0;
-volatile int algoFlag = 0;
+volatile int shiftFlag = 0;
+volatile int algoFlag = 1;
 volatile char uartBuffer;
 
 char input[50];
@@ -59,11 +60,10 @@ void SSR3Coff();
 
 void Init_Int0();
 void Init_Timer_0();
+void Init_Timer_1();
 void USART_Init();
 unsigned char uart_getc();
 void uart_gets( char* Buffer, uint8_t MaxLen, char endChar);
-void requestControlVals();
-void getAdcVals();
 void alphaAlgo(int* array, int percent);
 void phaseShiftAngle();
 void phaseShiftBurst();
@@ -73,6 +73,7 @@ void uart_sendc(char c);
 int main(void) {
     Init_Int0();
     Init_Timer_0();
+    Init_Timer_1();
     USART_Init();
     sei();
     DDRB = 0xFF;
@@ -117,91 +118,90 @@ int main(void) {
             SSR3Con();
             break;
         case 3: //uncorrected phase angle //WORKING
-            phaseShiftAngle();
-            if(timerCounter > (fireAngleTable[ctrlVal1]*netzT)/50) {
+            if(TCNT1 > fireAngleTable[ctrlVal1]) {
                 SSR1on();
             } else {
                 SSR1off();
             }
-            if(timerCounter > (fireAngleTable[ctrlVal2]*netzT)/50) {
+            if(TCNT1 > fireAngleTable[ctrlVal2]) {
                 SSR2on();
             } else {
                 SSR2off();
             }
-            if(timerCounter > (fireAngleTable[ctrlVal3]*netzT)/50) {
+            if(TCNT1 > fireAngleTable[ctrlVal3]) {
                 SSR3Aon();
             } else {
                 SSR3Aoff();
             }
-            if(timerCounterA > (fireAngleTable[ctrlVal3]*netzT)/50) {
+            phaseShiftAngle();
+            if(timerCounterA > fireAngleTable[ctrlVal3]) {
                 SSR3Bon();
             } else {
                 SSR3Boff();
             }
-            if(timerCounterB > (fireAngleTable[ctrlVal3]*netzT)/50) {
+            if(timerCounterB > fireAngleTable[ctrlVal3]) {
                 SSR3Con();
             } else {
                 SSR3Coff();
             }
             break;
-        case 4: //phase angle power	//WORKING
-            phaseShiftAngle();
-            if(timerCounter > (fireAngleTableP[ctrlVal1]*netzT)/50) {
+        case 4: //phase angle effective voltage //WORKING
+            if(TCNT1 > fireAngleTableV[ctrlVal1]) {
                 SSR1on();
             } else {
                 SSR1off();
             }
-            if(timerCounter > (fireAngleTableP[ctrlVal2]*netzT)/50) {
+            if(TCNT1 > fireAngleTableV[ctrlVal2]) {
                 SSR2on();
             } else {
                 SSR2off();
             }
-            if(timerCounter > (fireAngleTableP[ctrlVal3]*netzT)/50) {
+            if(TCNT1 > fireAngleTableV[ctrlVal3]) {
                 SSR3Aon();
             } else {
                 SSR3Aoff();
             }
-            if(timerCounterA > (fireAngleTableP[ctrlVal3]*netzT)/50) {
+            phaseShiftAngle();
+            if(timerCounterA > fireAngleTableV[ctrlVal3]) {
                 SSR3Bon();
             } else {
                 SSR3Boff();
             }
-            if(timerCounterB> (fireAngleTableP[ctrlVal3]*netzT)/50) {
+            if(timerCounterB > fireAngleTableV[ctrlVal3]) {
                 SSR3Con();
             } else {
                 SSR3Coff();
             }
             break;
-        case 5: //phase angle effective voltage //WORKING
-            phaseShiftAngle();
-            if(timerCounter > (fireAngleTableV[ctrlVal1]*netzT)/50) {
+        case 5: //phase angle power	//WORKING
+            if(TCNT1 > fireAngleTableP[ctrlVal1]) {
                 SSR1on();
             } else {
                 SSR1off();
             }
-            if(timerCounter > (fireAngleTableV[ctrlVal2]*netzT)/50) {
+            if(TCNT1 > fireAngleTableP[ctrlVal2]) {
                 SSR2on();
             } else {
                 SSR2off();
             }
-            if(timerCounter > (fireAngleTableV[ctrlVal3]*netzT)/50) {
+            if(TCNT1 > fireAngleTableP[ctrlVal3]) {
                 SSR3Aon();
             } else {
                 SSR3Aoff();
             }
-            if(timerCounterA > (fireAngleTableV[ctrlVal3]*netzT)/50) {
+            phaseShiftAngle();
+            if(timerCounterA > fireAngleTableP[ctrlVal3]) {
                 SSR3Bon();
             } else {
                 SSR3Boff();
             }
-            if(timerCounterB> (fireAngleTableV[ctrlVal3]*netzT)/50) {
+            if(timerCounterB > fireAngleTableP[ctrlVal3]) {
                 SSR3Con();
             } else {
                 SSR3Coff();
             }
             break;
         case 6: //burst fire low momentum //WORKING
-            phaseShiftBurst();
             if(intCounter+1 > 2*ctrlVal1) {
                 SSR1off();
             } else {
@@ -229,7 +229,6 @@ int main(void) {
             }
             break;
         case 7: //burst fire high momentum
-            phaseShiftAlgo();
             if(algoFlag == 1) {
                 alphaAlgo(algoA, ctrlVal1);
                 alphaAlgo(algoB, ctrlVal2);
@@ -284,29 +283,18 @@ void alphaAlgo(int* array, int percent) {
         algoCounter++;
     }
 }
-
 void phaseShiftAngle() {
-    if(timerCounter+67 <= 200) {
-        timerCounterA = timerCounter+67;
+    if(TCNT1+6667 <= 20000) {
+        timerCounterA = TCNT1+6667;
     } else {
-        timerCounterA = timerCounter-133;
+        timerCounterA = TCNT1-13333;
     }
-    if(timerCounter+133 <= 200) {
-        timerCounterB = timerCounter+133;
+    if(TCNT1+13333 <= 20000) {
+        timerCounterB = TCNT1+13333;
     } else {
-        timerCounterB = timerCounter-67;
+        timerCounterB = TCNT1-6667;
     }
 }
-
-void phaseShiftBurst() {
-    if (intCounter == 67) {
-        intCounterPhaseA = 0;
-    }
-    if (intCounter == 133) {
-        intCounterPhaseB = 0;
-    }
-}
-
 void phaseShiftAlgo() {
     if (burstCounterA == 100) {
         burstCounterA = 0;
@@ -316,17 +304,18 @@ void phaseShiftAlgo() {
     }
 }
 ISR (INT0_vect) {
-    cli();
-    timerCounter = 0;
+    TCNT1 = 0;
+    TCNT0 = 0;
+    shiftFlag = 1 - shiftFlag;
+    if(shiftFlag == 1) {
+        OCR0A = 52;
+    } else {
+        OCR0A = 104;
+    }
     intCounter++;
     if((intCounter%2==0)&&(intCounter!=0)) {
         burstCounter++;
-        burstCounterA++;
-        burstCounterB++;
     }
-    intCounterPhaseA++;
-    intCounterPhaseB++;
-    sei();
 }
 ISR(USART0_RX_vect) { //Wenn empfangen->wird das ausgefuehrt
     uartBuffer = uart_getc();
@@ -334,7 +323,14 @@ ISR(USART0_RX_vect) { //Wenn empfangen->wird das ausgefuehrt
     //received STRING EX. "1-0-100-099-098"
 }
 ISR (TIMER0_COMPA_vect) {
-    timerCounter++;
+    if(shiftFlag == 0) {
+        intCounterPhaseA = intCounter;
+        burstCounterA = burstCounter;
+    } else {
+        intCounterPhaseB = intCounter;
+        burstCounterB = burstCounter;
+        OCR0A = 255;
+    }
 }
 unsigned char uart_getc() {
     while (!(UCSR0A & (1<<RXC0))) {
@@ -392,10 +388,15 @@ void Init_Int0() {
     EICRA |= (1<<ISC00);
 }
 void Init_Timer_0() {
-    TCCR0A = (1<<WGM01);	//ctc mode
-    TCCR0B |= (1<<CS01);	//prescaler 8
-    OCR0A = 0x63;			//fill OCR0A with 99 for 50us angle steps
-    TIMSK0 |= (1<<1);		//enable compare interrupt
+    TCCR0A = (1<<WGM01);			//ctc mode
+    TCCR0B |= (1<<CS00)|(1<<CS02);	//prescaler 8
+    OCR0A = 103;					//fill OCR0A with 99 for 50us angle steps
+    TIMSK0 |= (1<<OCIE1A);				//enable compare interrupt
+}
+void Init_Timer_1() {
+    TCCR1A |= 0;   				//normal mode
+    TCCR1B |= (1<<CS11);		//prescaler 8
+    TIMSK1 |= (1<<TOIE1);		//enable overflow interrupt
 }
 void USART_Init() {
     /* Set baud rate */
