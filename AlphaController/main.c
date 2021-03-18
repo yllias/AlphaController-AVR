@@ -23,10 +23,10 @@ double fireAngleTableP [101]= {20000, 17700, 17100, 16600, 16300, 16000, 15700, 
 int netzT = 10000;
 
 //-----------------------control values---------------------------
-volatile int mode = 7;
+volatile int mode = 1;
 volatile int ctrlVal1 = 0;
 volatile int ctrlVal2 = 0;
-volatile int ctrlVal3 = 67;
+volatile int ctrlVal3 = 0;
 
 //-----------------------variables for timing and synchronisation--------
 volatile int intCounter = 0;
@@ -63,7 +63,6 @@ void Init_Timer_0();
 void Init_Timer_1();
 void USART_Init();
 unsigned char uart_getc();
-void uart_gets( char* Buffer, uint8_t MaxLen, char endChar);
 void alphaAlgo(int* array, int percent);
 void phaseShiftAngle();
 void phaseShiftBurst();
@@ -295,14 +294,6 @@ void phaseShiftAngle() {
         timerCounterB = TCNT1-6667;
     }
 }
-void phaseShiftAlgo() {
-    if (burstCounterA == 100) {
-        burstCounterA = 0;
-    }
-    if (burstCounterB == 100) {
-        burstCounterB = 0;
-    }
-}
 ISR (INT0_vect) {
     TCNT1 = 0;
     TCNT0 = 0;
@@ -317,10 +308,9 @@ ISR (INT0_vect) {
         burstCounter++;
     }
 }
-ISR(USART0_RX_vect) { //Wenn empfangen->wird das ausgefuehrt
+ISR(USART0_RX_vect) {
     uartBuffer = uart_getc();
     uartFlag = 1;
-    //received STRING EX. "1-0-100-099-098"
 }
 ISR (TIMER0_COMPA_vect) {
     if(shiftFlag == 0) {
@@ -336,17 +326,6 @@ unsigned char uart_getc() {
     while (!(UCSR0A & (1<<RXC0))) {
     }
     return UDR0;
-}
-void uart_gets( char* Buffer, uint8_t MaxLen, char endChar ) {
-    uint8_t NextChar;
-    uint8_t StringLen = 0;
-    NextChar = uart_getc();
-    while( NextChar != endChar && StringLen < MaxLen - 1 ) {
-        *Buffer++ = NextChar;
-        StringLen++;
-        NextChar = uart_getc();
-    }
-    *Buffer = '\0';
 }
 void uart_sendc(char c) {
     while (!(UCSR0A & (1<<UDRE0))) {
@@ -384,7 +363,7 @@ void SSR3Coff () {
     PORTB &= ~(1<<PB4);
 }
 void Init_Int0() {
-    EIMSK |= (1<<0);
+    EIMSK |= (1<<INT0);
     EICRA |= (1<<ISC00);
 }
 void Init_Timer_0() {
