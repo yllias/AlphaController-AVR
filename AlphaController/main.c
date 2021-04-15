@@ -16,9 +16,9 @@ int algoA[101] = {0};
 int algoB[101] = {0};
 int algoC[101] = {0};
 
-double fireAngleTable [101]= {20000, 19800, 19600, 19400, 19200, 19000, 18800, 18600, 18400, 18200, 18000, 17800, 17600, 17400, 17200, 17000, 16800, 16600, 16400, 16200, 16000, 15800, 15600, 15400, 15200, 15000, 14800, 14600, 14400, 14200, 14000, 13800, 13600, 13400, 13200, 13000, 12800, 12600, 12400, 12200, 12000, 11800, 11600, 11400, 11200, 11000, 10800, 10600, 10400, 10200, 10000, 9800, 9600, 9400, 9200, 9000, 8800, 8600, 8400, 8200, 8000, 7800, 7600, 7400, 7200, 7000, 6800, 6600, 6400, 6200, 6000, 5800, 5600, 5400, 5200, 5000, 4800, 4600, 4400, 4200, 4000, 3800, 3600, 3400, 3200, 3000, 2800, 2600, 2400, 2200, 2000, 1800, 1600, 1400, 1200, 1000, 800, 600, 400, 200, 0};
-double fireAngleTableV [101]= {20000, 19500, 19200, 19000, 18700, 18500, 18400, 18200, 18000, 17800, 17700, 17500, 17400, 17200, 17100, 16900, 16800, 16700, 16500, 16400, 16300, 16100, 16000, 15900, 15800, 15600, 15500, 15400, 15300, 15100, 15000, 14900, 14800, 14700, 14500, 14400, 14300, 14200, 14100, 13900, 13800, 13700, 13600, 13500, 13400, 13200, 13100, 13000, 12900, 12800, 12600, 12500, 12400, 12300, 12200, 12000, 11900, 11800, 11700, 11500, 11400, 11300, 11200, 11000, 10900, 10800, 10600, 10500, 10400, 10200, 10100, 10000, 9800, 9700, 9500, 9400, 9200, 9100, 8900, 8700, 8600, 8400, 8200, 8100, 7900, 7700, 7500, 7300, 7100, 6800, 6600, 6300, 6100, 5800, 5500, 5100, 4700, 4300, 3700, 2900, 0};
-double fireAngleTableP [101]= {20000, 17700, 17100, 16600, 16300, 16000, 15700, 15400, 15200, 15000, 14800, 14600, 14500, 14300, 14100, 14000, 13800, 13700, 13500, 13400, 13300, 13100, 13000, 12900, 12800, 12600, 12500, 12400, 12300, 12200, 12100, 12000, 11900, 11700, 11600, 11500, 11400, 11300, 11200, 11100, 11000, 10900, 10800, 10700, 10600, 10500, 10400, 10300, 10200, 10100, 10000, 9900, 9800, 9700, 9600, 9500, 9400, 9300, 9200, 9100, 9000, 8900, 8800, 8700, 8600, 8500, 8400, 8300, 8100, 8000, 7900, 7800, 7700, 7600, 7500, 7400, 7200, 7100, 7000, 6900, 6700, 6600, 6500, 6300, 6200, 6000, 5900, 5700, 5500, 5400, 5200, 5000, 4800, 4600, 4300, 4000, 3700, 3400, 2900, 2300, 0};
+double fireAngleTable [101]= {21000, 19800, 19600, 19400, 19200, 19000, 18800, 18600, 18400, 18200, 18000, 17800, 17600, 17400, 17200, 17000, 16800, 16600, 16400, 16200, 16000, 15800, 15600, 15400, 15200, 15000, 14800, 14600, 14400, 14200, 14000, 13800, 13600, 13400, 13200, 13000, 12800, 12600, 12400, 12200, 12000, 11800, 11600, 11400, 11200, 11000, 10800, 10600, 10400, 10200, 10000, 9800, 9600, 9400, 9200, 9000, 8800, 8600, 8400, 8200, 8000, 7800, 7600, 7400, 7200, 7000, 6800, 6600, 6400, 6200, 6000, 5800, 5600, 5400, 5200, 5000, 4800, 4600, 4400, 4200, 4000, 3800, 3600, 3400, 3200, 3000, 2800, 2600, 2400, 2200, 2000, 1800, 1600, 1400, 1200, 1000, 800, 600, 400, 200, 0};
+double fireAngleTableV [101]= {21000, 19500, 19200, 19000, 18700, 18500, 18400, 18200, 18000, 17800, 17700, 17500, 17400, 17200, 17100, 16900, 16800, 16700, 16500, 16400, 16300, 16100, 16000, 15900, 15800, 15600, 15500, 15400, 15300, 15100, 15000, 14900, 14800, 14700, 14500, 14400, 14300, 14200, 14100, 13900, 13800, 13700, 13600, 13500, 13400, 13200, 13100, 13000, 12900, 12800, 12600, 12500, 12400, 12300, 12200, 12000, 11900, 11800, 11700, 11500, 11400, 11300, 11200, 11000, 10900, 10800, 10600, 10500, 10400, 10200, 10100, 10000, 9800, 9700, 9500, 9400, 9200, 9100, 8900, 8700, 8600, 8400, 8200, 8100, 7900, 7700, 7500, 7300, 7100, 6800, 6600, 6300, 6100, 5800, 5500, 5100, 4700, 4300, 3700, 2900, 0};
+double fireAngleTableP [101]= {21000, 17700, 17100, 16600, 16300, 16000, 15700, 15400, 15200, 15000, 14800, 14600, 14500, 14300, 14100, 14000, 13800, 13700, 13500, 13400, 13300, 13100, 13000, 12900, 12800, 12600, 12500, 12400, 12300, 12200, 12100, 12000, 11900, 11700, 11600, 11500, 11400, 11300, 11200, 11100, 11000, 10900, 10800, 10700, 10600, 10500, 10400, 10300, 10200, 10100, 10000, 9900, 9800, 9700, 9600, 9500, 9400, 9300, 9200, 9100, 9000, 8900, 8800, 8700, 8600, 8500, 8400, 8300, 8100, 8000, 7900, 7800, 7700, 7600, 7500, 7400, 7200, 7100, 7000, 6900, 6700, 6600, 6500, 6300, 6200, 6000, 5900, 5700, 5500, 5400, 5200, 5000, 4800, 4600, 4300, 4000, 3700, 3400, 2900, 2300, 0};
 
 int netzT = 10000;
 
@@ -61,6 +61,7 @@ void SSR3Coff();
 void Init_Int0();
 void Init_Timer_0();
 void Init_Timer_1();
+void Init_Timer_2();
 void USART_Init();
 unsigned char uart_getc();
 void alphaAlgo(int* array, int percent);
@@ -73,6 +74,7 @@ int main(void) {
     Init_Int0();
     Init_Timer_0();
     Init_Timer_1();
+    Init_Timer_2();
     USART_Init();
     sei();
     DDRB = 0xFF;
@@ -102,21 +104,21 @@ int main(void) {
             algoFlag = 1;
         }
         switch(mode) {
-        case 1: //permanent LOW	//WORKING
+        case 1: //permanent LOW
             SSR1off();
             SSR2off();
             SSR3Aoff();
             SSR3Boff();
             SSR3Coff();
             break;
-        case 2: //permanent HIGH //WORKING
+        case 2: //permanent HIGH
             SSR1on();
             SSR2on();
             SSR3Aon();
             SSR3Bon();
             SSR3Con();
             break;
-        case 3: //uncorrected phase angle //WORKING
+        case 3: //uncorrected phase angle
             if(TCNT1 > fireAngleTable[ctrlVal1]) {
                 SSR1on();
             } else {
@@ -144,7 +146,7 @@ int main(void) {
                 SSR3Coff();
             }
             break;
-        case 4: //phase angle effective voltage //WORKING
+        case 4: //phase angle effective voltage
             if(TCNT1 > fireAngleTableV[ctrlVal1]) {
                 SSR1on();
             } else {
@@ -172,7 +174,7 @@ int main(void) {
                 SSR3Coff();
             }
             break;
-        case 5: //phase angle power	//WORKING
+        case 5: //phase angle power
             if(TCNT1 > fireAngleTableP[ctrlVal1]) {
                 SSR1on();
             } else {
@@ -200,7 +202,7 @@ int main(void) {
                 SSR3Coff();
             }
             break;
-        case 6: //burst fire low momentum //WORKING
+        case 6: //burst fire low momentum
             if(intCounter+1 > 2*ctrlVal1) {
                 SSR1off();
             } else {
@@ -227,7 +229,7 @@ int main(void) {
                 SSR3Con();
             }
             break;
-        case 7: //burst fire high momentum
+        case 7: //burst fire optimized for high momentum
             if(algoFlag == 1) {
                 alphaAlgo(algoA, ctrlVal1);
                 alphaAlgo(algoB, ctrlVal2);
@@ -296,17 +298,8 @@ void phaseShiftAngle() {
 }
 ISR (INT0_vect) {
     TCNT1 = 0;
-    TCNT0 = 0;
-    shiftFlag = 1 - shiftFlag;
-    if(shiftFlag == 1) {
-        OCR0A = 52;
-    } else {
-        OCR0A = 104;
-    }
-    intCounter++;
-    if((intCounter%2==0)&&(intCounter!=0)) {
-        burstCounter++;
-    }
+    TCNT2 = 0;
+    TCCR2B |= (1<<CS22);
 }
 ISR(USART0_RX_vect) {
     uartBuffer = uart_getc();
@@ -321,6 +314,21 @@ ISR (TIMER0_COMPA_vect) {
         burstCounterB = burstCounter;
         OCR0A = 255;
     }
+}
+ISR (TIMER2_COMPA_vect) {
+    TCNT0 = 0;
+    shiftFlag = 1 - shiftFlag;
+    if(shiftFlag == 1) {
+        OCR0A = 52;
+    } else {
+        OCR0A = 104;
+    }
+    intCounter++;
+    if((intCounter%2==0)&&(intCounter!=0)) {
+        burstCounter++;
+    }
+    //PORTC ^= (1<<PC4);
+    TCCR2B = 0x00;
 }
 unsigned char uart_getc() {
     while (!(UCSR0A & (1<<RXC0))) {
@@ -364,25 +372,31 @@ void SSR3Coff () {
 }
 void Init_Int0() {
     EIMSK |= (1<<INT0);
-    EICRA |= (1<<ISC00);
+    EICRA |= (1<<ISC01);
 }
 void Init_Timer_0() {
     TCCR0A = (1<<WGM01);			//ctc mode
     TCCR0B |= (1<<CS00)|(1<<CS02);	//prescaler 8
     OCR0A = 103;					//fill OCR0A with 99 for 50us angle steps
-    TIMSK0 |= (1<<OCIE1A);				//enable compare interrupt
+    TIMSK0 |= (1<<OCIE1A);			//enable compare interrupt
 }
 void Init_Timer_1() {
-    TCCR1A |= 0;   				//normal mode
-    TCCR1B |= (1<<CS11);		//prescaler 8
-    TIMSK1 |= (1<<TOIE1);		//enable overflow interrupt
+    TCCR1A |= 0;   					//normal mode
+    TCCR1B |= (1<<CS11);			//prescaler 8
+    TIMSK1 |= (1<<TOIE1);			//enable overflow interrupt
+}
+void Init_Timer_2() {
+    TCCR2A |= (1<<WGM01);			//ctc mode
+    TCCR2B |= (1<<CS22);			//prescaler 64
+    OCR2A = 149;					//fill OCR2A with 149 for 600us delay
+    TIMSK2 |= (1<<OCIE2A);			//enable compare interrupt
 }
 void USART_Init() {
-    /* Set baud rate */
+    /*Baudrate 38 400*/
     UBRR0 = 25;
-    /* Enable receiver and transmitter */
+    /* Aktivieren von Receiver and Transmitter und Receive-Interrupt */
     UCSR0B = (1<<RXEN0)|(1<<TXEN0)|(1<<RXCIE0);
-    /* Set frame format: 8data, 1stop bit */
+    /* UART-Rahmen mit 8 Datenbits und einem Stoppbit */
     UCSR0C = (1<<UCSZ01)|(1<<UCSZ00);
     UCSR0C &= ~(1<<USBS0);
 }
